@@ -1,0 +1,76 @@
+# Sqoop配置文件 - MySQL数据同步到HDFS
+
+# 连接信息
+export HADOOP_HOME=/path/to/hadoop
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_YARN_HOME=$HADOOP_HOME
+export SQOOP_HOME=/path/to/sqoop
+export PATH=$PATH:$SQOOP_HOME/bin
+
+# 同步用户数据
+$SQOOP_HOME/bin/sqoop import \
+  --connect jdbc:mysql://localhost:3306/fengmi \
+  --username root \
+  --password root \
+  --table t_user \
+  --target-dir hdfs://localhost:9000/user/root/ods/user \
+  --fields-terminated-by ',' \
+  --lines-terminated-by '\n' \
+  --m 1
+
+# 同步商品数据
+$SQOOP_HOME/bin/sqoop import \
+  --connect jdbc:mysql://localhost:3306/fengmi \
+  --username root \
+  --password root \
+  --table t_goods \
+  --target-dir hdfs://localhost:9000/user/root/ods/goods \
+  --fields-terminated-by ',' \
+  --lines-terminated-by '\n' \
+  --m 1
+
+# 同步订单数据
+$SQOOP_HOME/bin/sqoop import \
+  --connect jdbc:mysql://localhost:3306/fengmi \
+  --username root \
+  --password root \
+  --table t_order \
+  --target-dir hdfs://localhost:9000/user/root/ods/order \
+  --fields-terminated-by ',' \
+  --lines-terminated-by '\n' \
+  --m 1
+
+# 同步订单项数据
+$SQOOP_HOME/bin/sqoop import \
+  --connect jdbc:mysql://localhost:3306/fengmi \
+  --username root \
+  --password root \
+  --table t_order_item \
+  --target-dir hdfs://localhost:9000/user/root/ods/order_item \
+  --fields-terminated-by ',' \
+  --lines-terminated-by '\n' \
+  --m 1
+
+# 同步购物车数据
+$SQOOP_HOME/bin/sqoop import \
+  --connect jdbc:mysql://localhost:3306/fengmi \
+  --username root \
+  --password root \
+  --table t_cart \
+  --target-dir hdfs://localhost:9000/user/root/ods/cart \
+  --fields-terminated-by ',' \
+  --lines-terminated-by '\n' \
+  --m 1
+
+# 同步商品分类数据
+$SQOOP_HOME/bin/sqoop import \
+  --connect jdbc:mysql://localhost:3306/fengmi \
+  --username root \
+  --password root \
+  --table t_category \
+  --target-dir hdfs://localhost:9000/user/root/ods/category \
+  --fields-terminated-by ',' \
+  --lines-terminated-by '\n' \
+  --m 1
